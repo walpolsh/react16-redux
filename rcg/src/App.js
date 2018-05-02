@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import Person from './Person/Person'
-import { StyleRoot } from 'radium/lib';
+import classes from  './App.css';
+import Person from './Person/Person';
 
 class App extends Component {
   state = {
@@ -44,51 +43,46 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
             return <Person
-            click={() => this.deletePersonHandler(index)} 
-            name={person.name} 
-            age={person.age}
-            key={person.id}
-            changed={(event) => this.nameChangedHandler(event, person.id)} />
+                key={person.id}
+                click={() => this.deletePersonHandler(index)} 
+                name={person.name} 
+                age={person.age}
+                changed={(event) => this.nameChangedHandler(event, person.id)} 
+              />
           })}
         </div>
       );
-      style.backgroundColor = 'red';
+      btnClass = classes.Red;
     }
 
-    let classes = [];
+    let assignedClasses = [];
 
-    if (this.state.persons.length <= 2) {
-      classes.push('red'); //classes = red
+  if (this.state.persons.length <= 2) {
+      assignedClasses.push(classes.red); //classes = red
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold'); // classes = red, bold
+      assignedClasses.push(classes.bold); // classes = red, bold
     }
 
 
     return (
    
-        <div className="App">
+        <div className={classes.App}>
           <h1>Title</h1>
-          <p className={classes.join(' ')}>Click the button for the list of people</p>
+          <p className={assignedClasses.join(' ')}>Click the button for the list of people</p>
           <button 
-          onClick={this.togglePersonsHandler} 
-          style={style}>Switch Name</button>
+          onClick={this.togglePersonsHandler}
+          className={btnClass}>
+          Toggle Persons</button>
           {persons}
         </div>
 
