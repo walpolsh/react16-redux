@@ -3,6 +3,7 @@ import React from 'react';
 import classes from './BuildControls.css'
 import BuildControl from './BuildControl/BuildControl';
 
+//the types should match the types your checking for in the 'BurgerIngredients' componens.
 const controls = [
   { label:'Salad', type:'salad' },
   { label:'Bacon', type:'bacon' },
@@ -12,8 +13,14 @@ const controls = [
 
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
+    <p>Current Price: ${props.price.toFixed(2)}</p>
     {controls.map(ctrl => (
-      <BuildControl key={ctrl.label} label={ctrl.label} />
+      <BuildControl 
+      key={ctrl.label} 
+      label={ctrl.label}
+      added={() => props.ingredientAdded(ctrl.type)} 
+      removed={() => props.ingredientRemoved(ctrl.type)}
+      disabled={props.disabled[ctrl.type]}/>
     ))}
   </div>
 )
