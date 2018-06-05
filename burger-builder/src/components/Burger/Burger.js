@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
-import { SSL_OP_NETSCAPE_CHALLENGE_BUG } from 'constants';
 
 const burger = (props) => {
   let transformedIngredients = Object.keys(props.ingredients)
